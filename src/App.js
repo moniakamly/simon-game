@@ -1,22 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import './App.scss';
+import ColorCard from './components/ColorCard';
 
 function App() {
+  const [isOn, setIsOn] = useState(false);
+  const colorList = ["green", "red", "yellow", "blue"];
+  const initPlay = {
+    isDisplay: false, 
+    colors: [],
+    score: 0,
+    userState: false,
+    userColors: []
+  };
+
+  const [play, setPlay] = useState(initPlay);
+
+  function startHandle() {
+    setIsOn(true);
+  }
+   
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <div className="card__wrapper">
+        {colorList && colorList.map((value) => (
+          <ColorCard color={value}/>
+        ))}
+      </div>
+      <button onClick={startHandle} className="start__button">Start</button>
       </header>
     </div>
   );

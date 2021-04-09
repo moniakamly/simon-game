@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+.colorCard {
+  height: 200px;
+  width: 200px;
+}
+
+.card__wrapper {
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+}
+
+.start__button {
+  position: absolute;
+  width: 100px;
+}
+
+.flash {
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
