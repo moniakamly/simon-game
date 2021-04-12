@@ -53,7 +53,18 @@
   width: 100px;
 }
 
-.flash {
+.score {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background-color: black;
+  border-radius: 50%;
+  line-height: 100px;
+  font-size: 5;
+}
+
+.flash.flash {
+  background-color: black;
 }
 
 .red {
