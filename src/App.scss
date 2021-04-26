@@ -64,21 +64,49 @@
 }
 
 .flash.flash {
+  border: 3px solid white;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.lost {
+  position: absolute;
+  width: 200px;
+  height: 200px;
   background-color: black;
+  border-radius: 50%;
+  line-height: 100px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .red {
   background-color: red;
+  &.flash {
+    background-color: rgb(255, 125, 125);
+  }
 }
 
 .blue {
   background-color: blue;
+  &.flash {
+    background-color: rgb(125, 125, 255);
+  }
 }
 
 .green {
   background-color: green;
+  &.flash {
+    background-color: rgb(125, 255, 125);
+  }
 }
 
 .yellow {
   background-color: yellow;
+  &.flash {
+    background-color: rgb(255, 255, 125);
+  }
 }

@@ -46,12 +46,52 @@ function App() {
   }, [isOn, play.isDisplay, play.colors.length]);
 
   async function displayColors() {
+
+    await timeout(1000);
     for (let i = 0; i < play.colors.length; i++) {
       setFlashColor(play.colors[i]);
       await timeout(1000);
-      // setFlashColor("");
-      // await timeout(1000);
+      setFlashColor("");
+      await timeout(1000);
+
+      if (i === play.colors.length - 1) {
+        const copyColors = [...play.colors];
+
+        setPlay({
+          ...play, 
+          isDisplay: false,
+          userPlay: true, 
+          userColors: copyColors.reverse(),
+        });
+      }
     }
+  }
+
+  async function cardClickHandle(color) {
+    if(!play.isDisplay && play.userPlay) {
+
+      const copyUserColors = [...play.userColors];
+      const lastColor = copyUserColors.pop();
+      setFlashColor(color);
+      
+      if (color === lastColor) {
+        if(copyUserColors.length) {
+          setPlay({...play, userColors: copyUserColors})
+        } else {
+          await timeout(1000);
+          setPlay({...play, isDisplay: true, userPlay: false, userColors: [], score:play.colors.length})
+        }
+      } else {
+        await timeout(1000);
+        setPlay({...initPlay, score:play.colors.length})
+      }
+      await timeout(1000);
+      setFlashColor("");
+    }
+  }
+
+  function closeHandle() {
+    setIsOn(false);
   }
    
   return (
@@ -59,9 +99,17 @@ function App() {
       <header className="App-header">
       <div className="card__wrapper">
         {colorList && colorList.map((value) => (
-          <ColorCard flash={flashColor === value} color={value}/>
+          <ColorCard onClick={() => {cardClickHandle(value)}} flash={flashColor === value} color={value}/>
         ))}
       </div>
+      { isOn && !play.isDisplay && !play.userPlay && play.score &&
+        (
+          <div className="lost">
+          <div>FINAL SCORE: {play.score}</div>
+            <button onClick={closeHandle}>Close</button>
+           </div>
+        )
+      }
       { !isOn && !play.score && (
         <button onClick={startHandle} className="start__button">
           Start
