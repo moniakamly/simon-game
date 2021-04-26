@@ -15,7 +15,7 @@ function App() {
   };
 
   const [play, setPlay] = useState(initPlay);
-  const [flashColor, setFlashColor] = ("");
+  const [flashColor, setFlashColor] = useState("");
 
   function startHandle() {
     setIsOn(true);
@@ -32,10 +32,10 @@ function App() {
   useEffect(() => {
     if (isOn && play.isDisplay) {
       let newColor = colorList[Math.floor(Math.random()*4)]
-
       const copyColors = [...play.colors];
+
       copyColors.push(newColor);
-      setPlay({...play, color:copyColors});
+      setPlay({...play, colors:copyColors});
     }
   }, [isOn, play.isDisplay])
 
@@ -46,7 +46,7 @@ function App() {
   }, [isOn, play.isDisplay, play.colors.length]);
 
   async function displayColors() {
-    for (let i=0; i<play.colors.length; i++) {
+    for (let i = 0; i < play.colors.length; i++) {
       setFlashColor(play.colors[i]);
       await timeout(1000);
       // setFlashColor("");
